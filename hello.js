@@ -65,6 +65,29 @@ app.post('/update-profile', async (req, res) => {
   }
 });
 
+
+
+// Search endpoint
+app.get('/search', async (req, res) => {
+  const searchTerm = req.query.search;
+  if (!searchTerm) {
+    return res.status(400).send('Search term is required.');
+  }
+
+  try {
+    const db = client.db('final');
+    const booksCollection = db.collection('books'); // Assume books are in the 'books' collection
+    const results = await booksCollection.find({
+      title: { $regex: searchTerm, $options: 'i' } // Case-insensitive regex match
+    }).toArray();
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+    res.status(500).send('An error occurred while searching.');
+  }
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
