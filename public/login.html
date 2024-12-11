@@ -37,13 +37,33 @@
             <h1>Log In</h1>
             <div id="message"></div>
             <form id="loginForm">
-                <input type="email" id="email" required placeholder="Enter your email">
-                <input type="password" id="password" required placeholder="Enter your password">
-                <button type="submit">Log In</button>
+                <input type="text" id="loginUsername" required placeholder="Enter your username">
+                <input type="password" id="loginPassword" required placeholder="Enter your password">
+                <button onclick="login()">Login</button>
             </form>
             <a href="register.html" class="toggle-btn">Don't have an account? Register here.</a>
         </div>
     </div>
+    <script>
+            async function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('currentUser', JSON.stringify(data.user));
+                window.location.href = 'profile.html';
+            } else {
+                alert(data.message || 'Login failed');
+            }
+        }
+    </script>
     <script src="footer.js"></script>
 </body>
 </html>
