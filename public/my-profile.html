@@ -40,6 +40,7 @@
             <h2>Your Profile</h2>
             <p><strong>Name:</strong> <span id="viewProfileName"></span></p>
             <p><strong>Bio:</strong> <span id="viewProfileBio"></span></p>
+            <p><strong>Books:</strong> <span id="viewProfileBooks"></span></p>
             <button onclick="showEditProfile()">Edit Profile</button>
         </div>
 
@@ -47,6 +48,7 @@
             <h2>Edit Profile</h2>
             <input type="text" id="editProfileName" placeholder="Name">
             <textarea id="editProfileBio" placeholder="Bio"></textarea>
+            <input type="text" id="editProfileBooks" placeholder="Book">
             <button onclick="updateProfile()">Save Profile</button>
             <button onclick="showProfileView()">Cancel</button>
         </div>
@@ -74,15 +76,17 @@
         async function updateProfile() {
             const name = document.getElementById('editProfileName').value;
             const bio = document.getElementById('editProfileBio').value;
+            const book = document.getElementById('editProfileBooks').value;
 
             const response = await fetch('/update-profile', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: currentUser.username, name, bio }),
+                body: JSON.stringify({ username: currentUser.username, name, bio, books: book }),
             });
             if (response.ok) {
                 currentUser.name = name;
                 currentUser.bio = bio;
+                currentUser.books = book;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 showProfileView();
             } else {
@@ -96,6 +100,7 @@
 
             document.getElementById('viewProfileName').innerText = currentUser.name || 'No name set';
             document.getElementById('viewProfileBio').innerText = currentUser.bio || 'No bio set';
+            document.getElementById('viewProfileBooks').innerText = currentUser.bio || 'No books set';
         }
     </script>
     <script src="footer.js"></script>
