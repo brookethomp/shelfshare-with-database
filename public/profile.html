@@ -40,9 +40,6 @@
             <h2>Your Profile</h2>
             <p><strong>Name:</strong> <span id="viewProfileName"></span></p>
             <p><strong>Bio:</strong> <span id="viewProfileBio"></span></p>
-            <p><strong>Address:</strong> <span id="viewProfileAddress"></span></p>
-            <p><strong>Favorite Books:</strong></p>
-            <ul id="viewProfileBooks"></ul>
             <button onclick="showEditProfile()">Edit Profile</button>
         </div>
 
@@ -50,8 +47,6 @@
             <h2>Edit Profile</h2>
             <input type="text" id="editProfileName" placeholder="Name">
             <textarea id="editProfileBio" placeholder="Bio"></textarea>
-            <input type="text" id="editProfileAddress" placeholder="Address">
-            <textarea id="editProfileBooks" placeholder="Favorite Books (comma-separated)"></textarea>
             <button onclick="updateProfile()">Save Profile</button>
             <button onclick="showProfileView()">Cancel</button>
         </div>
@@ -66,8 +61,6 @@
             }
             document.getElementById('viewProfileName').innerText = currentUser.name || 'No name set';
             document.getElementById('viewProfileBio').innerText = currentUser.bio || 'No bio set';
-            document.getElementById('viewProfileAddress').innerText = currentUser.address || 'No address set';
-            updateBooksView(currentUser.books || []);
         });
 
         function showEditProfile() {
@@ -76,26 +69,20 @@
 
             document.getElementById('editProfileName').value = currentUser.name || '';
             document.getElementById('editProfileBio').value = currentUser.bio || '';
-            document.getElementById('editProfileAddress').value = currentUser.address || '';
-            document.getElementById('editProfileBooks').value = (currentUser.books || []).join(', ');
         }
 
         async function updateProfile() {
             const name = document.getElementById('editProfileName').value;
             const bio = document.getElementById('editProfileBio').value;
-            const address = document.getElementById('editProfileAddress').value;
-            const books = document.getElementById('editProfileBooks').value.split(',').map(book => book.trim());
 
             const response = await fetch('/update-profile', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: currentUser.username, name, bio, address, books }),
+                body: JSON.stringify({ username: currentUser.username, name, bio }),
             });
             if (response.ok) {
                 currentUser.name = name;
                 currentUser.bio = bio;
-                currentUser.address = address;
-                currentUser.books = books;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 showProfileView();
             } else {
@@ -109,18 +96,6 @@
 
             document.getElementById('viewProfileName').innerText = currentUser.name || 'No name set';
             document.getElementById('viewProfileBio').innerText = currentUser.bio || 'No bio set';
-            document.getElementById('viewProfileAddress').innerText = currentUser.address || 'No address set';
-            updateBooksView(currentUser.books || []);
-        }
-
-        function updateBooksView(books) {
-            const booksList = document.getElementById('viewProfileBooks');
-            booksList.innerHTML = '';
-            books.forEach(book => {
-                const listItem = document.createElement('li');
-                listItem.textContent = book;
-                booksList.appendChild(listItem);
-            });
         }
     </script>
     <script src="footer.js"></script>
