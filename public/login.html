@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Login | ShelfShare</title>
+        <link rel="icon" type="image/x-icon" href="icon.png">
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- For hamburger and social media icons -->
+        <style type="text/css">
+            .content {
+                padding: 20px 20% 50px 20%;
+                text-align: justify;
+                line-height: 2;
+            }
+            .content h1 {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+                line-height: 1.2;
+            }
+
+            @media (max-width: 600px) {
+                .content {
+                    padding: 20px 50px 20px 50px;
+                }
+            }
+        </style>
+
+        <!-- Header -->
+        <script src="header.js"></script>
+    </head>
+<body>
+    <div class="content">
+        <div class="form-container">
+            <h1>Log In</h1>
+            <div id="message"></div>
+            <form id="loginForm">
+                <input type="email" id="email" required placeholder="Enter your email">
+                <input type="password" id="password" required placeholder="Enter your password">
+                <button type="submit">Log In</button>
+            </form>
+            <a href="register.html" class="toggle-btn">Don't have an account? Register here.</a>
+        </div>
+    </div>
+    <script src="footer.js"></script>
+</body>
+</html>
