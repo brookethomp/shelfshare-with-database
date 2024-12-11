@@ -17,25 +17,25 @@
                 position: fixed; /* Keep it fixed at the top */
                 top: 0; /* Ensure it starts at the very top */
                 left: 0;
-                z-index: 2000; /* Keep it above all other content */
+                z-index: 1000; /* Keep it above all other content */
                 box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional for aesthetics */
 }
-            body {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                font-family: "Avenir", Arial, sans-serif;
-                background-color: #F4E1C1; /* Soft tan background */
-            }
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    min-height: 100vh; /* Ensure the body spans the full height */
+    font-family: "Avenir", Arial, sans-serif;
+    background-color: #F4E1C1; /* Soft tan background */
+}
 
 .container {
     margin-top: 300px; /* Adjust this value to match your header's height */
+    flex: 1; /* Allow the container to grow and take available space */
     display: flex;
     flex-direction: column;
-    gap: 200px;
+    gap: 20px; /* Add space between login and register boxes */
     align-items: center;
     max-width: 500px;
     width: 100%;
