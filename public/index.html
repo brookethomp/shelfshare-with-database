@@ -25,14 +25,14 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column; /* Arrange children vertically */
-    min-height: 100vh; /* Ensure the body spans the full height */
+    min-height: 100vh; /* Ensure the body spans the full viewport height */
     font-family: "Avenir", Arial, sans-serif;
     background-color: #F4E1C1; /* Soft tan background */
 }
 
 .container {
     margin-top: 300px; /* Adjust this value to match your header's height */
-    flex: 1; /* Allow the container to grow and take available space */
+    flex: 1; /* Allow the container to grow and fill space */
     display: flex;
     flex-direction: column;
     gap: 20px; /* Add space between login and register boxes */
@@ -40,8 +40,6 @@ body {
     max-width: 500px;
     width: 100%;
 }
-
-
             .content {
                 width: 100%;
                 padding: 30px;
@@ -86,14 +84,15 @@ body {
                 font-size: 14px;
                 color: #6E6E6E;
             }
-            footer {
+footer {
     width: 100%;
     background-color: #3A7CA5;
     color: #FFFFFF;
     text-align: center;
     padding: 10px 0;
-    position: relative; /* Ensure it stays within the normal flow */
+    position: relative; /* Keep it in the document flow */
 }
+
 
 
             @media (max-width: 600px) {
