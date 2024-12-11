@@ -83,8 +83,8 @@ app.get('/search', async (req, res) => {
 
     res.status(200).json(results);
   } catch (error) {
-    console.error('Error fetching search results:', error);
-    res.status(500).send('An error occurred while searching.');
+    console.error('Error fetching book search results:', error);
+    res.status(500).send('An error occurred while searching for books.');
   }
 });
 
