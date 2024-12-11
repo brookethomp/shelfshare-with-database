@@ -51,11 +51,11 @@ app.post('/login', async (req, res) => {
 
 // Update profile endpoint
 app.post('/update-profile', async (req, res) => {
-  const { username, name, bio } = req.body;
+  const { username, name, bio, book } = req.body;
 
   const result = await usersCollection.updateOne(
     { username },
-    { $set: { name, bio } }
+    { $set: { name, bio, book } }
   );
 
   if (result.modifiedCount > 0) {
